@@ -7,15 +7,15 @@
   <title>Products</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <!-- IonIcons -->
-  <link rel="stylesheet" href="{% static 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
 
-  <link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -56,10 +56,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../index.html" class="brand-link">
-      <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Online Ombor</span>
-    </a>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -138,18 +135,22 @@
                             <th scope="col" style="text-align: center;">Brendi</th>
                             <th scope="col" style="text-align: center;">Narxi</th>
                             <th scope="col" style="text-align: center;">Miqdori</th>
+                            <th scope="col" style="text-align: center;">Kelgan sanasi</th>
                             <th scope="col" style="text-align: center;"></th>
                         </tr>
                     </thead>
                     <tbody>
+                    {% for mahsulot in mahsulotlar %}
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Un</td>
-                            <td>Qozoq Oliy navi</td>
-                            <td>530000 so'm</td>
-                            <td>50</td>
-                            <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{mahsulot.nom}}</td>
+                            <td>{{mahsulot.narx}}</td>
+                            <td>{{mahsulot.brend}}</td>
+                            <td>{{mahsulot.miqdor}} {{mahsulot.olchov}}</td>
+                            <td>{{ mahsulot.kelgan_sana }}</td>
+                            <td><a href="/bolimlar/mahsulotlar/"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -168,19 +169,22 @@
           </div>
     
           <!-- Modal body -->
-          <form action="#" id="new-product-form" >
+          <form method="post" action="/bolimlar/mahsulotlar/" id="new-product-form" >{% csrf_token %}
             <div class="modal-body">
               <label for="new-product-name">Nomi:</label>
-              <input type="text" name="pr_name" placeholder="Mahsulot nomi..." id="new-product-name" class="form-control" required>
+              <input type="text" name="n" placeholder="Mahsulot nomi..." id="new-product-name" class="form-control" required>
               <br>
               <label for="new-product-name">Brend:</label>
-              <input type="text" name="pr_brand" placeholder="Mahsulot brendi..." id="new-product-brend" class="form-control" required>
+              <input type="text" name="b" placeholder="Mahsulot brendi..." id="new-product-brend" class="form-control" required>
               <br>
               <label for="new-product-name">Narxi:</label>
-              <input type="text" name="pr_price" placeholder="Maxsulot narxi..." id="new-product-price" class="form-control" required>
+              <input type="text" name="m_n" placeholder="Maxsulot narxi..." id="new-product-price" class="form-control" required>
               <br>
               <label for="new-product-name">Miqdori:</label>
-              <input type="number" name="pr_amount" placeholder="Mahsulot miqdori..." id="new-product-amount" class="form-control" required>
+              <input type="number" name="m" placeholder="Mahsulot miqdori..." id="new-product-amount" class="form-control" required>
+              <br>
+                <label for="new-product-name">O'lchovi:</label>
+              <input type="text" name="m_o" placeholder="O'lchov uchun..." id="new-product" class="form-control" required>
               <br>
             </div>
     

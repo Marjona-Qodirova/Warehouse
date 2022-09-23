@@ -10,7 +10,7 @@ class Maxsulot(models.Model):
     brend=models.CharField(max_length=30)
     miqdor=models.PositiveSmallIntegerField()
     olchov=models.CharField(max_length=12, choices=[("kg","kg"), ("dona","dona"),("qop","qop")])
-    kelgan_sana=models.DateTimeField()
+    kelgan_sana=models.DateTimeField(auto_now_add=True)
     ombor=models.ForeignKey(Omborxona, on_delete=models.CASCADE)
     def __str__(self):
         return self.nom
